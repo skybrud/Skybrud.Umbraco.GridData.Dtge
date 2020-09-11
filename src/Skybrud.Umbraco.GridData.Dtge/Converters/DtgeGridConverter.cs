@@ -1,9 +1,10 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Converters;
+using Skybrud.Umbraco.GridData.Dtge.Models;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Rendering;
 
-namespace Skybrud.Umbraco.GridData.Dtge {
+namespace Skybrud.Umbraco.GridData.Dtge.Converters {
 
     /// <summary>
     /// Grid converter for the DocTypeGridEditor.
