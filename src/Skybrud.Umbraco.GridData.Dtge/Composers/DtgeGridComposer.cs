@@ -1,4 +1,5 @@
-﻿using Skybrud.Umbraco.GridData.Dtge.Converters;
+﻿using Skybrud.Umbraco.GridData.Converters;
+using Skybrud.Umbraco.GridData.Dtge.Converters;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
 
@@ -8,8 +9,8 @@ namespace Skybrud.Umbraco.GridData.Dtge.Composers {
     internal class DtgeGridComposer : IUserComposer {
         
         public void Compose(Composition composition) {
-            
-            GridContext.Current.Converters.Add(new DtgeGridConverter());
+
+            composition.GridConverters().Append<DtgeGridConverter>();
 
         }
 

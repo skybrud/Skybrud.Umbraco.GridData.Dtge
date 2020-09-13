@@ -52,6 +52,15 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models{
 
         #endregion
 
+        #region Member methods
+
+        /// <inheritdoc />
+        public override string GetSearchableText(GridContext context) {
+            return Element == null ? Environment.NewLine : context.GetSearchableText(Element);
+        }
+
+        #endregion
+
         #region Static methods
 
         /// <summary>
