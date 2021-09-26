@@ -30,8 +30,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Skybrud.Umbraco.GridData" Version="3.0.1" />
-    <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Version="1.2.4" />
+    <PackageReference Include="Skybrud.Umbraco.GridData" Version="3.0.2" />
+    <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Exclude="contentFiles" Version="1.2.7" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(ConfigurationName)'=='Release' AND '$(BuildTools)'=='1'">
