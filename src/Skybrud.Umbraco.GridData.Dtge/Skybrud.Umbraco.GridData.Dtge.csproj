@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>2.0.0-beta001</Version>
+    <Version>2.0.0</Version>
     <Authors>Anders Bjerner</Authors>
     <Company>Limbo</Company>
     <Description>DocTypeGridEditor addon for Skybrud.Umbraco.GridData</Description>
