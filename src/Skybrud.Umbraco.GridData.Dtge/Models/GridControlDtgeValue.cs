@@ -15,6 +15,16 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models{
         #region Properties
 
         /// <summary>
+        /// Gets the unique ID of this DTGE value.
+        /// </summary>
+        public Guid Id { get; }
+
+        /// <summary>
+        /// Gets the alias of the underlying element type.
+        /// </summary>
+        public string DtgeContentTypeAlias { get; }
+
+        /// <summary>
         /// Gets a reference <see cref="IPublishedElement"/> of grid control.
         /// </summary>
         public IPublishedElement Element { get; }
@@ -31,23 +41,25 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models{
             
             JObject value = control.JObject.GetObject("value");
 
-            string id = value.GetString("id");
+            Id = value.GetGuid("id");
 
-            string docTypeAlias = value.GetString("dtgeContentTypeAlias");
+            DtgeContentTypeAlias = value.GetString("dtgeContentTypeAlias");
 
             string contentValue = value.GetObject("value").ToString();
 
-            Element = DocTypeGridEditorHelper.ConvertValueToContent(id, docTypeAlias, contentValue);
+            Element = DocTypeGridEditorHelper.ConvertValueToContent(Id.ToString(), DtgeContentTypeAlias, contentValue);
 
         }
-
+        
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="element"/> and <paramref name="control"/>.
+        /// Initializes a new instance based on the specified DTGE <paramref name="value"/>.
         /// </summary>
-        /// <param name="element">An instance of <see cref="IPublishedElement"/> representing the value.</param>
+        /// <param name="value">An instance of <see cref="GridControlDtgeValue"/> representing the value to wrap.</param>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        protected GridControlDtgeValue(IPublishedElement element, GridControl control) : base(control, control.JObject)  {
-            Element = element;
+        protected GridControlDtgeValue(GridControlDtgeValue value, GridControl control) : base(control, control.JObject) {
+            Id = value.Id;
+            DtgeContentTypeAlias = value.DtgeContentTypeAlias;
+            Element = value.Element;
         }
 
         #endregion
@@ -55,8 +67,8 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models{
         #region Member methods
 
         /// <inheritdoc />
-        public override string GetSearchableText(GridContext context) {
-            return Element == null ? Environment.NewLine : context.GetSearchableText(Element);
+        public override string GetSearchableText() {
+            return Element == null ? Environment.NewLine : GridContext.Current.GetSearchableText(Element);
         }
 
         #endregion
@@ -75,14 +87,15 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models{
             if (value.Element == null) return value;
 
             // Get the generic type that we wish to instantiate
-            var type = typeof(GridControlDtgeValue<>).MakeGenericType(value.Element.GetType());
+            Type type = typeof(GridControlDtgeValue<>).MakeGenericType(value.Element.GetType());
 
             // Create a generic DTGE value instance
-            return (GridControlDtgeValue) Activator.CreateInstance(type, value.Element, control);
+            return (GridControlDtgeValue) Activator.CreateInstance(type, value, control);
 
         }
 
         #endregion
 
     }
+
 }

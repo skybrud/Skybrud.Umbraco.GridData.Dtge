@@ -24,6 +24,20 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
             }
             return value != null;
         }
+        
+        /// <summary>
+        /// Converts the specified <paramref name="token"/> into an instance of <see cref="IGridEditorConfig"/>.
+        /// </summary>
+        /// <param name="editor"></param>
+        /// <param name="token">The instance of <see cref="JToken"/> representing the editor config.</param>
+        /// <param name="config">The converted config.</param>
+        public override bool ConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config)  {
+            config = null;
+            if (IsDocTypeGridEditor(editor)) {
+                config = GridEditorDtgeConfig.Parse(editor, token as JObject);
+            }
+            return config != null;
+        }
 
         /// <summary>
         /// Gets an instance <see cref="GridControlWrapper"/> for the specified <paramref name="control"/>.
@@ -36,13 +50,12 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
                 wrapper = control.GetControlWrapper<GridControlDtgeValue>();
             }
             return wrapper != null;
-
         }
 
         private bool IsDocTypeGridEditor(GridEditor editor) {
 
             // The editor may be NULL if it no longer exists in a package.manifest file
-            if (editor == null) return false;
+            if (editor?.View == null) return false;
 
             const string view = "/App_Plugins/DocTypeGridEditor/Views/doctypegrideditor.html";
 
