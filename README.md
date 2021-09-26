@@ -6,7 +6,7 @@
 
 ## Installation
 
-The package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData.GridData" target="_blank">NuGet</a>. To install the package, you can use either the NuGet Package Manager in Visual Studio:
+The package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData.GridData" target="_blank">NuGet</a>. To install the package, you can use the NuGet Package Manager in Visual Studio:
 
 ```
 Install-Package Skybrud.Umbraco.GridData.Dtge -Version 2.0.0
