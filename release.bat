@@ -1,5 +1,3 @@
 @echo off
-"src/build/Skybrud.Build.exe"
-cd src/Skybrud.Umbraco.GridData.Dtge
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\msbuild.exe" /t:pack /p:Configuration=Release /p:PackageOutputPath=../../releases/nuget
-cd ../../
+
+dotnet build src/Skybrud.Umbraco.GridData.Dtge --configuration Release /t:rebuild /t:pack -p:BuildTools=1 -p:PackageOutputPath=../../releases/nuget
