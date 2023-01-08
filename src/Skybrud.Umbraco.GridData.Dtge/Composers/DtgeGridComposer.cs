@@ -1,16 +1,18 @@
-﻿using Skybrud.Umbraco.GridData.Dtge.Converters;
-using Umbraco.Core;
-using Umbraco.Core.Composing;
+﻿using Skybrud.Umbraco.GridData.Composers;
+using Skybrud.Umbraco.GridData.Dtge.Converters;
+using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.DependencyInjection;
 
-namespace Skybrud.Umbraco.GridData.Dtge.Composers {
+namespace Skybrud.Umbraco.GridData.Dtge.Composers
+{
 
-    [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
-    internal class DtgeGridComposer : IUserComposer {
-        
-        public void Compose(Composition composition) {
-            
-            GridContext.Current.Converters.Add(new DtgeGridConverter());
+    internal class DtgeGridComposer : IComposer
+    {
 
+        public void Compose(IUmbracoBuilder builder)
+        {
+
+            builder.GridConverters().Append<DtgeGridConverter>();
         }
 
     }

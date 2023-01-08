@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
-using Skybrud.Umbraco.GridData.Config;
+using Skybrud.Umbraco.GridData.Models;
+using Skybrud.Umbraco.GridData.Models.Config;
 
 namespace Skybrud.Umbraco.GridData.Dtge.Models {
     

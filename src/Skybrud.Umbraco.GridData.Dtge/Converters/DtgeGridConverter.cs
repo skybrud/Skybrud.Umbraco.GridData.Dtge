@@ -1,15 +1,30 @@
 ﻿using Newtonsoft.Json.Linq;
+using Our.Umbraco.DocTypeGridEditor.Helpers;
 using Skybrud.Umbraco.GridData.Converters;
 using Skybrud.Umbraco.GridData.Dtge.Models;
-using Skybrud.Umbraco.GridData.Interfaces;
-using Skybrud.Umbraco.GridData.Rendering;
+using Skybrud.Umbraco.GridData.Models;
+using Skybrud.Umbraco.GridData.Models.Config;
+using Skybrud.Umbraco.GridData.Models.Values;
+using System;
 
-namespace Skybrud.Umbraco.GridData.Dtge.Converters {
+namespace Skybrud.Umbraco.GridData.Dtge.Converters
+{
 
     /// <summary>
     /// Grid converter for the DocTypeGridEditor.
     /// </summary>
-    public class DtgeGridConverter : GridConverterBase {
+    public class DtgeGridConverter : GridConverterBase
+    {
+        private readonly GridContext gridContext;
+        private readonly DocTypeGridEditorHelper dtgeHelper;
+
+        /// <inheritdoc/>        
+        public DtgeGridConverter(GridContext gridContext, DocTypeGridEditorHelper dtgeHelper)
+        {
+            this.gridContext = gridContext;
+            this.dtgeHelper = dtgeHelper;
+        }
+
 
         /// <summary>
         /// Converts the specified <paramref name="token"/> into an instance of <see cref="IGridControlValue"/>.
@@ -17,42 +32,56 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
         /// <param name="control">A reference to the parent <see cref="GridControl"/>.</param>
         /// <param name="token">The instance of <see cref="JToken"/> representing the control value.</param>
         /// <param name="value">The converted control value.</param>
-        public override bool ConvertControlValue(GridControl control, JToken token, out IGridControlValue value) {
+        public override bool ConvertControlValue(GridControl control, JToken token, out IGridControlValue value)
+        {
             value = null;
-            if (IsDocTypeGridEditor(control.Editor)) {
-                value = GridControlDtgeValue.Parse(control);
+            if (IsDocTypeGridEditor(control.Editor))
+            {
+                value = GridControlDtgeValue.Parse(gridContext, control, dtgeHelper);
             }
             return value != null;
         }
-        
-        /// <summary>
-        /// Converts the specified <paramref name="token"/> into an instance of <see cref="IGridEditorConfig"/>.
-        /// </summary>
-        /// <param name="editor"></param>
-        /// <param name="token">The instance of <see cref="JToken"/> representing the editor config.</param>
-        /// <param name="config">The converted config.</param>
-        public override bool ConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config)  {
+
+        /// <inheritdoc/>
+        public override bool ConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config)
+        {
             config = null;
-            if (IsDocTypeGridEditor(editor)) {
+            if (IsDocTypeGridEditor(editor))
+            {
                 config = GridEditorDtgeConfig.Parse(editor, token as JObject);
             }
             return config != null;
         }
 
-        /// <summary>
-        /// Gets an instance <see cref="GridControlWrapper"/> for the specified <paramref name="control"/>.
-        /// </summary>
-        /// <param name="control">The control to be wrapped.</param>
-        /// <param name="wrapper">The wrapper.</param>
-        public override bool GetControlWrapper(GridControl control, out GridControlWrapper wrapper) {
-            wrapper = null;
-            if (IsDocTypeGridEditor(control.Editor)) {
-                wrapper = control.GetControlWrapper<GridControlDtgeValue>();
+
+
+        /// <inheritdoc/>
+        public override bool GetValueType(GridControl control, out Type type)
+        {
+            type = null;
+            if (IsDocTypeGridEditor(control.Editor))
+            {
+                type = typeof(GridControlDtgeValue);
             }
-            return wrapper != null;
+
+            return type != null;
         }
 
-        private bool IsDocTypeGridEditor(GridEditor editor) {
+        /// <inheritdoc/>
+
+        public override bool GetConfigType(GridEditor editor, out Type type)
+        {
+            type = null;
+            if (IsDocTypeGridEditor(editor))
+            {
+                type = typeof(GridEditorDtgeConfig);
+            }
+            return type != null;
+        }
+
+
+        private bool IsDocTypeGridEditor(GridEditor editor)
+        {
 
             // The editor may be NULL if it no longer exists in a package.manifest file
             if (editor?.View == null) return false;

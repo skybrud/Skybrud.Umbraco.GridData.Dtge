@@ -1,4 +1,6 @@
-﻿using Umbraco.Core.Models.PublishedContent;
+﻿using Skybrud.Umbraco.GridData.Models;
+using Umbraco.Cms.Core.Models.PublishedContent;
+
 
 namespace Skybrud.Umbraco.GridData.Dtge.Models {
     

@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
-
   <PropertyGroup>
     <Version>2.0.0</Version>
     <Authors>Anders Bjerner</Authors>
@@ -11,7 +9,6 @@
     <Description>DocTypeGridEditor addon for Skybrud.Umbraco.GridData</Description>
     <Copyright>Copyright © 2021</Copyright>
   </PropertyGroup>
-
   <PropertyGroup>
     <PackageId>Skybrud.Umbraco.GridData.Dtge</PackageId>
     <PackageTags>Skybrud, Limbo, Umbraco, Grid</PackageTags>
@@ -20,22 +17,21 @@
     <PackageProjectUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData.Dtge</PackageProjectUrl>
     <PackageIconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</PackageIconUrl>
   </PropertyGroup>
-
   <ItemGroup>
-    <None Include="../build/Limbo.png" Pack="true" PackagePath="\"/>
+    <None Include="../build/Limbo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
-
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Skybrud.Umbraco.GridData.Dtge.xml</DocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Skybrud.Umbraco.GridData" Version="3.0.2" />
-    <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Exclude="contentFiles" Version="1.2.7" />
+    <PackageReference Include="Skybrud.Umbraco.GridData" Version="5.0.0-alpha001" />
+    <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Exclude="contentFiles" Version="10.0.1" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.355802">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Umbraco.Cms.Core" Version="10.0.0" />
   </ItemGroup>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(ConfigurationName)'=='Release' AND '$(BuildTools)'=='1'">
     <Exec Command="&quot;$(ProjectDir)..\build\Skybrud.BuildTools.Tasks.exe&quot; &quot;postBuild&quot; &quot;$(ConfigurationName)&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
   </Target>
-
 </Project>
