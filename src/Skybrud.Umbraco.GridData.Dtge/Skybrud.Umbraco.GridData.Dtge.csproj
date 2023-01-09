@@ -26,9 +26,6 @@
   <ItemGroup>
     <PackageReference Include="Skybrud.Umbraco.GridData" Version="5.0.0-alpha001" />
     <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Exclude="contentFiles" Version="10.0.1" />
-    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.355802">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Umbraco.Cms.Core" Version="10.0.0" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(ConfigurationName)'=='Release' AND '$(BuildTools)'=='1'">
