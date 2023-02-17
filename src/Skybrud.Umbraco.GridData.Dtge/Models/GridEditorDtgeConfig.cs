@@ -4,44 +4,44 @@ using Skybrud.Umbraco.GridData.Models;
 using Skybrud.Umbraco.GridData.Models.Config;
 
 namespace Skybrud.Umbraco.GridData.Dtge.Models {
-    
+
     /// <summary>
     /// Class representing the configuration of a DTGE grid editor.
     /// </summary>
     public class GridEditorDtgeConfig : GridEditorConfigBase {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets an array of doc type aliases of which should be allowed to be selected in the grid editor.
         /// </summary>
         public string[] AllowedDocTypes { get; }
-        
+
         /// <summary>
         /// Gets the naming template of the grid editor.
         /// </summary>
         public string NameTemplate { get; }
-        
+
         /// <summary>
         /// Gets whether rendering a preview of the grid cell in the grid editor is enabled.
         /// </summary>
         public bool EnablePreview { get; }
-        
+
         /// <summary>
         /// Gets the view path of the editor.
         /// </summary>
         public string ViewPath { get; }
-        
+
         /// <summary>
         /// Gets the preview view path of the editor.
         /// </summary>
         public string PreviewViewPath { get; }
-        
+
         /// <summary>
         /// Gets the preview CSS file path of the grid editor.
         /// </summary>
         public string PreviewCssFilePath { get; }
-        
+
         /// <summary>
         /// Gets the preview JS file path of the grid editor.
         /// </summary>

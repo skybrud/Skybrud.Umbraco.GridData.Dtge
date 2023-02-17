@@ -6,21 +6,15 @@ using Skybrud.Umbraco.GridData.Models;
 using Skybrud.Umbraco.GridData.Models.Values;
 using Umbraco.Cms.Core.Models.PublishedContent;
 
-namespace Skybrud.Umbraco.GridData.Dtge.Models
-{
+namespace Skybrud.Umbraco.GridData.Dtge.Models {
 
     /// <summary>
-    /// Class representing the value of a DocTypeGridEditor grid control. 
+    /// Class representing the value of a DocTypeGridEditor grid control.
     /// </summary>
-    public class GridControlDtgeValue : GridControlValueBase
-    {
+    public class GridControlDtgeValue : GridControlValueBase {
 
-      
-
-        private readonly GridContext _gridContext;        
+        private readonly GridContext _gridContext;
         private readonly DocTypeGridEditorHelper _dtgeHelper;
-    
-
 
         #region Properties
 
@@ -49,8 +43,8 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models
         /// <param name="context"></param>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
         /// <param name="dtgeHelper"></param>
-        protected GridControlDtgeValue(GridContext context, GridControl control, DocTypeGridEditorHelper dtgeHelper) : base(control, control.JObject)
-        {
+        protected GridControlDtgeValue(GridContext context, GridControl control, DocTypeGridEditorHelper dtgeHelper) : base(control, control.JObject) {
+
             _dtgeHelper = dtgeHelper;
 
             JObject value = control.JObject.GetObject("value");
@@ -71,8 +65,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models
         /// </summary>
         /// <param name="value">An instance of <see cref="GridControlDtgeValue"/> representing the value to wrap.</param>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        protected GridControlDtgeValue(GridControlDtgeValue value, GridControl control) : base(control, control.JObject)
-        {
+        protected GridControlDtgeValue(GridControlDtgeValue value, GridControl control) : base(control, control.JObject) {
             Id = value.Id;
             DtgeContentTypeAlias = value.DtgeContentTypeAlias;
             Element = value.Element;
@@ -83,8 +76,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models
         #region Member methods
 
         /// <inheritdoc />
-        public override string GetSearchableText(GridContext context)
-        {
+        public override string GetSearchableText(GridContext context) {
             return Element == null ? Environment.NewLine : GetSearchableText(_gridContext);
         }
 
@@ -99,8 +91,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models
         /// <param name="gridContext"></param>
         /// <param name="control">The parent control.</param>
         /// <param name="dtgeHelper"></param>
-        public static GridControlDtgeValue Parse(GridContext gridContext, GridControl control, DocTypeGridEditorHelper dtgeHelper)
-        {
+        public static GridControlDtgeValue Parse(GridContext gridContext, GridControl control, DocTypeGridEditorHelper dtgeHelper) {
 
             if (control == null) return null;
 

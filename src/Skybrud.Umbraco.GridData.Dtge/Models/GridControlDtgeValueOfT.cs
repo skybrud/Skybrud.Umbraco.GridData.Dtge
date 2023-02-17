@@ -1,9 +1,8 @@
 ﻿using Skybrud.Umbraco.GridData.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
 
-
 namespace Skybrud.Umbraco.GridData.Dtge.Models {
-    
+
     /// <summary>
     /// Class representing a generic version of <see cref="GridControlDtgeValue"/>.
     /// </summary>
