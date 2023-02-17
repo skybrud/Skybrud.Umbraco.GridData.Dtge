@@ -1,34 +1,47 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
+    <LangVersion>11.0</LangVersion>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
+
   <PropertyGroup>
-    <Version>2.0.0</Version>
-    <Authors>Anders Bjerner</Authors>
+    <VersionPrefix>4.0.0</VersionPrefix>
+    <VersionSuffix Condition="'$(Configuration)'=='Debug'">build$([System.DateTime]::UtcNow.ToString(`yyyyMMddHHmm`))</VersionSuffix>
     <Company>Limbo</Company>
-    <Description>DocTypeGridEditor addon for Skybrud.Umbraco.GridData</Description>
-    <Copyright>Copyright © 2021</Copyright>
+    <Authors>Anders Bjerner</Authors>
+    <Copyright>Copyright © $([System.DateTime]::UtcNow.ToString(`yyyy`))</Copyright>
+    <Description>DocTypeGridEditor add-on for Skybrud.Umbraco.GridData.</Description>
   </PropertyGroup>
+
+  <!-- Information for the NuGet package -->
   <PropertyGroup>
     <PackageId>Skybrud.Umbraco.GridData.Dtge</PackageId>
-    <PackageTags>Skybrud, Limbo, Umbraco, Grid</PackageTags>
-    <PackageIcon>Limbo.png</PackageIcon>
+    <PackageTags>Skybrud, Limbo, Umbraco, Grid, Umbraco-Marketplace</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData.Dtge</PackageProjectUrl>
-    <PackageIconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</PackageIconUrl>
+    <PackageProjectUrl>https://packages.skybrud.dk/skybrud.umbraco.griddata.dtge/</PackageProjectUrl>
+    <PackageIcon>Limbo.png</PackageIcon>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData.Dtge</RepositoryUrl>
   </PropertyGroup>
-  <ItemGroup>
-    <None Include="../build/Limbo.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
-  <PropertyGroup>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Skybrud.Umbraco.GridData.Dtge.xml</DocumentationFile>
-  </PropertyGroup>
+
+  <!-- Include NuGet dependencies -->
   <ItemGroup>
     <PackageReference Include="Skybrud.Umbraco.GridData" Version="5.0.0-alpha001" />
     <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Exclude="contentFiles" Version="10.0.1" />
     <PackageReference Include="Umbraco.Cms.Core" Version="10.0.0" />
   </ItemGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(ConfigurationName)'=='Release' AND '$(BuildTools)'=='1'">
-    <Exec Command="&quot;$(ProjectDir)..\build\Skybrud.BuildTools.Tasks.exe&quot; &quot;postBuild&quot; &quot;$(ConfigurationName)&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
-  </Target>
+
+  <!-- Include package icon for NuGet -->
+  <ItemGroup>
+    <Content Include="../build/Limbo.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Generate XML documentation -->
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>
