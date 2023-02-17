@@ -6,6 +6,7 @@ using Skybrud.Umbraco.GridData.Models;
 using Skybrud.Umbraco.GridData.Models.Config;
 using Skybrud.Umbraco.GridData.Models.Values;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Skybrud.Umbraco.GridData.Dtge.Converters {
 
@@ -13,13 +14,11 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
     /// Grid converter for the DocTypeGridEditor.
     /// </summary>
     public class DtgeGridConverter : GridConverterBase {
-
-        private readonly GridContext _gridContext;
+        
         private readonly DocTypeGridEditorHelper _dtgeHelper;
 
         /// <inheritdoc/>
-        public DtgeGridConverter(GridContext gridContext, DocTypeGridEditorHelper dtgeHelper) {
-            _gridContext = gridContext;
+        public DtgeGridConverter(DocTypeGridEditorHelper dtgeHelper) {
             _dtgeHelper = dtgeHelper;
         }
 
@@ -29,16 +28,16 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
         /// <param name="control">A reference to the parent <see cref="GridControl"/>.</param>
         /// <param name="token">The instance of <see cref="JToken"/> representing the control value.</param>
         /// <param name="value">The converted control value.</param>
-        public override bool TryConvertControlValue(GridControl control, JToken token, out IGridControlValue value) {
+        public override bool TryConvertControlValue(GridControl control, JToken token, [NotNullWhen(true)] out IGridControlValue? value) {
             value = null;
             if (IsDocTypeGridEditor(control.Editor)) {
-                value = GridControlDtgeValue.Parse(_gridContext, control, _dtgeHelper);
+                value = GridControlDtgeValue.Parse(control, _dtgeHelper);
             }
             return value != null;
         }
 
         /// <inheritdoc/>
-        public override bool TryConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config) {
+        public override bool TryConvertEditorConfig(GridEditor editor, JToken token, [NotNullWhen(true)] out IGridEditorConfig? config) {
             config = null;
             if (IsDocTypeGridEditor(editor)) {
                 config = GridEditorDtgeConfig.Parse(editor, token as JObject);
@@ -47,7 +46,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
         }
 
         /// <inheritdoc/>
-        public override bool TryGetValueType(GridControl control, out Type type) {
+        public override bool TryGetValueType(GridControl control, [NotNullWhen(true)] out Type? type) {
             type = null;
             if (IsDocTypeGridEditor(control.Editor)) {
                 type = typeof(GridControlDtgeValue);
@@ -56,7 +55,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
         }
 
         /// <inheritdoc/>
-        public override bool TryGetConfigType(GridEditor editor, out Type type) {
+        public override bool TryGetConfigType(GridEditor editor, [NotNullWhen(true)] out Type? type) {
             type = null;
             if (IsDocTypeGridEditor(editor)) {
                 type = typeof(GridEditorDtgeConfig);

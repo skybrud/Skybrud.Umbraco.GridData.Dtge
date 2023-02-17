@@ -38,19 +38,13 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
         /// Initializes a new instance based on the specified <paramref name="control"/>.
         /// </summary>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        /// <param name="dtgeHelper"></param>
-        protected GridControlDtgeValue(GridControl control, DocTypeGridEditorHelper dtgeHelper) : base(control) {
-
-            JObject value = control.JObject.GetObject("value");
-
-            Id = value.GetGuid("id");
-
-            DtgeContentTypeAlias = value.GetString("dtgeContentTypeAlias");
-
-            string contentValue = value.GetObject("value")!.ToString();
-
-            Element = dtgeHelper.ConvertValueToContent(Id.ToString(), DtgeContentTypeAlias, contentValue);
-
+        /// <param name="id">The unique ID of the DTGE value.</param>
+        /// <param name="contentTypeAlias">The alias of the underlying content type.</param>
+        /// <param name="element">The <see cref="IPublishedElement"/> representing the parsed DTGE value.</param>
+        protected GridControlDtgeValue(GridControl control, Guid id, string contentTypeAlias, IPublishedElement element) : base(control) {
+            Id = id;
+            DtgeContentTypeAlias = contentTypeAlias;
+            Element = element;
         }
 
         /// <summary>
@@ -80,21 +74,33 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
         /// <summary>
         /// Gets a media value from the specified <paramref name="control"/>.
         /// </summary>
-        /// <param name="gridContext"></param>
         /// <param name="control">The parent control.</param>
         /// <param name="dtgeHelper"></param>
-        public static GridControlDtgeValue Parse(GridContext gridContext, GridControl control, DocTypeGridEditorHelper dtgeHelper) {
+        public static GridControlDtgeValue? Parse(GridControl? control, DocTypeGridEditorHelper dtgeHelper) {
 
-            if (control == null) return null;
+            // Get a reference to the grid control value
+            JObject? value = control?.JObject.GetObject("value");
+            if (value is null) return null;
 
-            GridControlDtgeValue value = new(gridContext, control, dtgeHelper);
-            if (value.Element == null) return value;
+            // Read and parse the raw DTGE values
+            Guid id = value.GetGuid("id");
+            string contentTypeAlias = value.GetString("dtgeContentTypeAlias")!;
+            string? contentValue = value.GetObject("value")?.ToString();
+            if (string.IsNullOrWhiteSpace(contentTypeAlias)) return null;
+            if (string.IsNullOrWhiteSpace(contentValue)) return null;
+
+            // Convert the DTGE value to a IPublishedElement
+            IPublishedElement? element = dtgeHelper.ConvertValueToContent(id.ToString(), contentTypeAlias, contentValue);
+            if (element is null) return null;
+
+            // Initialize a new grid control value
+            GridControlDtgeValue dtge = new(control!, id, contentTypeAlias, element);
 
             // Get the generic type that we wish to instantiate
-            Type type = typeof(GridControlDtgeValue<>).MakeGenericType(value.Element.GetType());
+            Type type = typeof(GridControlDtgeValue<>).MakeGenericType(element.GetType());
 
             // Create a generic DTGE value instance
-            return (GridControlDtgeValue)Activator.CreateInstance(type, value, control);
+            return (GridControlDtgeValue) Activator.CreateInstance(type, dtge, control)!;
 
         }
 
