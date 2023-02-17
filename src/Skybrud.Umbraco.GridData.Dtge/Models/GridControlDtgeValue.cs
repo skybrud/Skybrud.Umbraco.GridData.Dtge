@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Newtonsoft.Json.Linq;
 using Our.Umbraco.DocTypeGridEditor.Helpers;
 using Skybrud.Essentials.Json.Extensions;
@@ -63,8 +64,8 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
         #region Member methods
 
         /// <inheritdoc />
-        public override string GetSearchableText(GridContext context) {
-            return context.GetSearchableText(Element);
+        public override void WriteSearchableText(GridContext context, TextWriter writer) {
+            context.WriteSearchableText(Element, writer);
         }
 
         #endregion
