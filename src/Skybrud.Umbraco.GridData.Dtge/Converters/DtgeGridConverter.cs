@@ -40,7 +40,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
         public override bool TryConvertEditorConfig(GridEditor editor, JToken token, [NotNullWhen(true)] out IGridEditorConfig? config) {
             config = null;
             if (IsDocTypeGridEditor(editor)) {
-                config = GridEditorDtgeConfig.Parse(editor, token as JObject);
+                config = GridEditorDtgeConfig.Parse(editor);
             }
             return config != null;
         }

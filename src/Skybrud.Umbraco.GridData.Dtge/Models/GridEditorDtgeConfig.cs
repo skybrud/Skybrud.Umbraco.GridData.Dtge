@@ -68,13 +68,12 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
         #region Static methods
 
         /// <summary>
-        /// Gets an instance of <see cref="GridEditorDtgeConfig"/> from the specified <paramref name="json"/> object.
+        /// Gets an instance of <see cref="GridEditorDtgeConfig"/> from the specified <paramref name="editor"/>.
         /// </summary>
         /// <param name="editor">The parent editor.</param>
-        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
-        [return: NotNullIfNotNull(nameof(json))]
-        public static GridEditorDtgeConfig? Parse(GridEditor editor, JObject? json) {
-            return json == null ? null : new GridEditorDtgeConfig(editor, json);
+        [return: NotNullIfNotNull(nameof(editor))]
+        public static GridEditorDtgeConfig? Parse(GridEditor? editor) {
+            return editor == null ? null : new GridEditorDtgeConfig(editor, editor.JObject.GetObject("config")!);
         }
 
         #endregion
