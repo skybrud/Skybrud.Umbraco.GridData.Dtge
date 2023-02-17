@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Models;
 using Skybrud.Umbraco.GridData.Models.Config;
@@ -15,7 +16,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
         /// <summary>
         /// Gets an array of doc type aliases of which should be allowed to be selected in the grid editor.
         /// </summary>
-        public string[] AllowedDocTypes { get; }
+        public IReadOnlyList<string> AllowedDocTypes { get; }
 
         /// <summary>
         /// Gets the naming template of the grid editor.

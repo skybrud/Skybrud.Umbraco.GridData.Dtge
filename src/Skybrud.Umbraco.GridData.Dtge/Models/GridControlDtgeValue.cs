@@ -14,7 +14,6 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
     public class GridControlDtgeValue : GridControlValueBase {
 
         private readonly GridContext _gridContext;
-        private readonly DocTypeGridEditorHelper _dtgeHelper;
 
         #region Properties
 
@@ -46,7 +45,6 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
         protected GridControlDtgeValue(GridContext context, GridControl control, DocTypeGridEditorHelper dtgeHelper) : base(control) {
 
             _gridContext = context;
-            _dtgeHelper = dtgeHelper;
 
             JObject value = control.JObject.GetObject("value");
 
@@ -56,7 +54,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
 
             string contentValue = value.GetObject("value")!.ToString();
 
-            Element = _dtgeHelper.ConvertValueToContent(Id.ToString(), DtgeContentTypeAlias, contentValue);
+            Element = dtgeHelper.ConvertValueToContent(Id.ToString(), DtgeContentTypeAlias, contentValue);
 
         }
 
@@ -95,7 +93,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
 
             if (control == null) return null;
 
-            GridControlDtgeValue value = new GridControlDtgeValue(gridContext, control, dtgeHelper);
+            GridControlDtgeValue value = new(gridContext, control, dtgeHelper);
             if (value.Element == null) return value;
 
             // Get the generic type that we wish to instantiate
