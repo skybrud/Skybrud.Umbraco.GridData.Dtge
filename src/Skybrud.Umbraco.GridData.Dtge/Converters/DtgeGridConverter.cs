@@ -14,7 +14,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
     /// Grid converter for the DocTypeGridEditor.
     /// </summary>
     public class DtgeGridConverter : GridConverterBase {
-        
+
         private readonly DocTypeGridEditorHelper _dtgeHelper;
 
         /// <inheritdoc/>
