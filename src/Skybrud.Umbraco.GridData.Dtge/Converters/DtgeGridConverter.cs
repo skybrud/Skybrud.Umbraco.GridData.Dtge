@@ -14,13 +14,13 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
     /// </summary>
     public class DtgeGridConverter : GridConverterBase {
 
-        private readonly GridContext gridContext;
-        private readonly DocTypeGridEditorHelper dtgeHelper;
+        private readonly GridContext _gridContext;
+        private readonly DocTypeGridEditorHelper _dtgeHelper;
 
         /// <inheritdoc/>
         public DtgeGridConverter(GridContext gridContext, DocTypeGridEditorHelper dtgeHelper) {
-            this.gridContext = gridContext;
-            this.dtgeHelper = dtgeHelper;
+            _gridContext = gridContext;
+            _dtgeHelper = dtgeHelper;
         }
 
 
@@ -33,7 +33,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
         public override bool ConvertControlValue(GridControl control, JToken token, out IGridControlValue value) {
             value = null;
             if (IsDocTypeGridEditor(control.Editor)) {
-                value = GridControlDtgeValue.Parse(gridContext, control, dtgeHelper);
+                value = GridControlDtgeValue.Parse(_gridContext, control, _dtgeHelper);
             }
             return value != null;
         }

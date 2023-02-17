@@ -45,6 +45,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
         /// <param name="dtgeHelper"></param>
         protected GridControlDtgeValue(GridContext context, GridControl control, DocTypeGridEditorHelper dtgeHelper) : base(control, control.JObject) {
 
+            _gridContext = context;
             _dtgeHelper = dtgeHelper;
 
             JObject value = control.JObject.GetObject("value");
@@ -57,7 +58,6 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
 
             Element = _dtgeHelper.ConvertValueToContent(Id.ToString(), DtgeContentTypeAlias, contentValue);
 
-            this._gridContext = context;
         }
 
         /// <summary>
