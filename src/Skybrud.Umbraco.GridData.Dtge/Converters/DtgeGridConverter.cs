@@ -23,14 +23,13 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
             _dtgeHelper = dtgeHelper;
         }
 
-
         /// <summary>
         /// Converts the specified <paramref name="token"/> into an instance of <see cref="IGridControlValue"/>.
         /// </summary>
         /// <param name="control">A reference to the parent <see cref="GridControl"/>.</param>
         /// <param name="token">The instance of <see cref="JToken"/> representing the control value.</param>
         /// <param name="value">The converted control value.</param>
-        public override bool ConvertControlValue(GridControl control, JToken token, out IGridControlValue value) {
+        public override bool TryConvertControlValue(GridControl control, JToken token, out IGridControlValue value) {
             value = null;
             if (IsDocTypeGridEditor(control.Editor)) {
                 value = GridControlDtgeValue.Parse(_gridContext, control, _dtgeHelper);
@@ -39,7 +38,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
         }
 
         /// <inheritdoc/>
-        public override bool ConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config) {
+        public override bool TryConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config) {
             config = null;
             if (IsDocTypeGridEditor(editor)) {
                 config = GridEditorDtgeConfig.Parse(editor, token as JObject);
@@ -48,7 +47,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
         }
 
         /// <inheritdoc/>
-        public override bool GetValueType(GridControl control, out Type type) {
+        public override bool TryGetValueType(GridControl control, out Type type) {
             type = null;
             if (IsDocTypeGridEditor(control.Editor)) {
                 type = typeof(GridControlDtgeValue);
@@ -57,7 +56,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
         }
 
         /// <inheritdoc/>
-        public override bool GetConfigType(GridEditor editor, out Type type) {
+        public override bool TryGetConfigType(GridEditor editor, out Type type) {
             type = null;
             if (IsDocTypeGridEditor(editor)) {
                 type = typeof(GridEditorDtgeConfig);

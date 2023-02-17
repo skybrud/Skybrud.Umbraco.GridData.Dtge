@@ -43,7 +43,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
         /// <param name="context"></param>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
         /// <param name="dtgeHelper"></param>
-        protected GridControlDtgeValue(GridContext context, GridControl control, DocTypeGridEditorHelper dtgeHelper) : base(control, control.JObject) {
+        protected GridControlDtgeValue(GridContext context, GridControl control, DocTypeGridEditorHelper dtgeHelper) : base(control) {
 
             _gridContext = context;
             _dtgeHelper = dtgeHelper;
@@ -54,7 +54,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
 
             DtgeContentTypeAlias = value.GetString("dtgeContentTypeAlias");
 
-            string contentValue = value.GetObject("value").ToString();
+            string contentValue = value.GetObject("value")!.ToString();
 
             Element = _dtgeHelper.ConvertValueToContent(Id.ToString(), DtgeContentTypeAlias, contentValue);
 
@@ -65,7 +65,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
         /// </summary>
         /// <param name="value">An instance of <see cref="GridControlDtgeValue"/> representing the value to wrap.</param>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        protected GridControlDtgeValue(GridControlDtgeValue value, GridControl control) : base(control, control.JObject) {
+        protected GridControlDtgeValue(GridControlDtgeValue value, GridControl control) : base(control) {
             Id = value.Id;
             DtgeContentTypeAlias = value.DtgeContentTypeAlias;
             Element = value.Element;

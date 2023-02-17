@@ -51,7 +51,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Models {
 
         #region Constructors
 
-        private GridEditorDtgeConfig(GridEditor editor, JObject obj) : base(editor, obj) {
+        private GridEditorDtgeConfig(GridEditor editor, JObject obj) : base(obj, editor) {
             AllowedDocTypes = obj.GetStringArray("allowedDocTypes");
             NameTemplate = obj.GetString("nameTemplate");
             EnablePreview = obj.GetBoolean("enablePreview");
