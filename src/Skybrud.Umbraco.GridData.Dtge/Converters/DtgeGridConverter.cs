@@ -63,7 +63,7 @@ namespace Skybrud.Umbraco.GridData.Dtge.Converters {
             return type != null;
         }
 
-        private bool IsDocTypeGridEditor(GridEditor editor) {
+        private bool IsDocTypeGridEditor(GridEditor? editor) {
 
             // The editor may be NULL if it no longer exists in a package.manifest file
             if (editor?.View == null) return false;
