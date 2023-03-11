@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>4.0.0</VersionPrefix>
+    <VersionPrefix>4.0.1</VersionPrefix>
     <VersionSuffix Condition="'$(Configuration)'=='Debug'">build$([System.DateTime]::UtcNow.ToString(`yyyyMMddHHmm`))</VersionSuffix>
     <Company>Limbo</Company>
     <Authors>Anders Bjerner</Authors>
     <Copyright>Copyright © $([System.DateTime]::UtcNow.ToString(`yyyy`))</Copyright>
-    <Description>DocTypeGridEditor add-on for Skybrud.Umbraco.GridData.</Description>
+    <Description>Doc Type Grid Editor add-on for Skybrud.Umbraco.GridData.</Description>
   </PropertyGroup>
 
   <!-- Information for the NuGet package -->
@@ -22,7 +22,7 @@
     <PackageId>Skybrud.Umbraco.GridData.Dtge</PackageId>
     <PackageTags>Skybrud, Limbo, Umbraco, Grid, Umbraco-Marketplace</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://packages.skybrud.dk/skybrud.umbraco.griddata.dtge/</PackageProjectUrl>
+    <PackageProjectUrl>https://packages.skybrud.dk/skybrud.umbraco.griddata.dtge/v4/</PackageProjectUrl>
     <PackageIcon>Limbo.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData.Dtge</RepositoryUrl>
