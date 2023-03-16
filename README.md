@@ -1,16 +1,22 @@
 # Skybrud.Umbraco.GridData.Dtge
 
-
+Add-on for [**Skybrud.Umbraco.GridData**](https://github.com/skybrud/Skybrud.Umbraco.GridData) that adds support for [**Doc Type Grid Editor**](https://github.com/skttl/umbraco-doc-type-grid-editor).
 
 <br /><br />
 
 ## Installation
 
-The package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData.Dtge" target="_blank">NuGet</a>. To install the package, you can use the NuGet Package Manager in Visual Studio:
+The package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData.Dtge" target="_blank">NuGet</a>. To install the package, you can use either .NET CLI:
+
+dotnet add package Skybrud.Umbraco.GridData.Dtge --version 4.0.1
+
+or the NuGet Package Manager in Visual Studio:
 
 ```
-Install-Package Skybrud.Umbraco.GridData.Dtge -Version 4.0.1
+Install-Package Skybrud.Umbraco.GridData.Dtge -Version 4.0.2
 ```
+
+
 
 
 <br /><br />
