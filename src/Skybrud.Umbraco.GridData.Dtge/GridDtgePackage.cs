@@ -17,7 +17,7 @@ namespace Skybrud.Umbraco.GridData.Dtge {
         /// <summary>
         /// Gets the friendly name of the package.
         /// </summary>
-        public const string Name = "Limbo Grid Data DTGE";
+        public const string Name = "Skybrud Grid Data DTGE";
 
         /// <summary>
         /// Gets the version of the package.
