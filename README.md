@@ -6,14 +6,14 @@ Add-on for [**Skybrud.Umbraco.GridData**](https://github.com/skybrud/Skybrud.Umb
 
 ## Installation
 
-The package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData.Dtge" target="_blank">NuGet</a>. To install the package, you can use either .NET CLI:
+The package is only available via [**NuGet**](https://www.nuget.org/packages/Skybrud.Umbraco.GridData.Dtge). To install the package, you can use either .NET CLI:
 
-dotnet add package Skybrud.Umbraco.GridData.Dtge --version 4.0.1
+dotnet add package Skybrud.Umbraco.GridData.Dtge --version 4.0.3
 
 or the NuGet Package Manager in Visual Studio:
 
 ```
-Install-Package Skybrud.Umbraco.GridData.Dtge -Version 4.0.2
+Install-Package Skybrud.Umbraco.GridData.Dtge -Version 4.0.3
 ```
 
 
